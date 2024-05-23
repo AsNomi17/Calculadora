@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+    <div class="calculator">
+        <div class="screen" id="screen">0</div>
+        <div class="buttons">
+          <button class="button" onclick="clearScreen()">C</button>
+          <button class="button" onclick="appendCharacter('/')" >/</button>
+          <button class="button" onclick="appendCharacter('*')">x</button>
+          <button class="button operator" onclick="backspace()">⌫</button>
+          
+          <button class="button" onclick="appendCharacter('7')">7</button>
+          <button class="button" onclick="appendCharacter('8')">8</button>
+          <button class="button" onclick="appendCharacter('9')">9</button>
+          <button class="button operator" onclick="appendCharacter('-')">-</button>
+          
+          <button class="button" onclick="appendCharacter('4')">4</button>
+          <button class="button" onclick="appendCharacter('5')">5</button>
+          <button class="button" onclick="appendCharacter('6')">6</button>
+          <button class="button operator" onclick="appendCharacter('+')">+</button>
+          
+          <button class="button" onclick="appendCharacter('1')">1</button>
+          <button class="button" onclick="appendCharacter('2')">2</button>
+          <button class="button" onclick="appendCharacter('3')">3</button>
+          <button class="button" onclick="appendCharacter('.')">.</button>
+          <button class="button double" onclick="calculateResult()">=</button>
+          <button class="button double" onclick="appendCharacter('0')">0</button>
+        </div>
+      </div>
+      
+      <script>
+        var currentNumber;
+var operator = false;
+function appendCharacter(Numero){
+ currentNumber = Numero
+if (operator == false){
+    document.getElementById('screen').innerHTML = currentNumber;
+    operator = true;
+    return;
+}
+document.getElementById('screen').innerHTML += currentNumber;   
+}
+
+function calculateResult(){
+var Operacion = document.getElementById('screen').innerHTML
+var Resultado = eval(Operacion)
+document.getElementById('screen').innerHTML = Resultado;
+}
+
+function backspace(){
+var contenido = document.getElementById('screen').innerHTML;
+var nuevoContenido = contenido.slice(0, -1);
+document.getElementById('screen').innerHTML = nuevoContenido;
+if(nuevoContenido == ""){
+    document.getElementById('screen').innerHTML = "0";
+    operator = false;
+}
+}
+
+function clearScreen(){  
+document.getElementById('screen').innerHTML = "0";
+operator = false
+}
+      </script>
+
+      <style>
+        body {
+  font-family: 'Press Start 2P', cursive;
+  background-color: #1a1a1a;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.calculator {
+  background-color: #2d2d2d;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  width: 80vw; /* Ajusta el tamaño de la calculadora según el ancho de la ventana */
+  max-width: 400px; /* Establece un ancho máximo para evitar que sea demasiado grande */
+}
+
+.screen {
+  background-color: #1a1a1a;
+  padding: 10px;
+  text-align: right;
+  font-size: 1.2em;
+  color: #00ff00;
+  border-bottom: 1px solid #00ff00;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.button {
+  background-color: #1f1f1f;
+  color: #fff;
+  font-size: 1.2em;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0);
+}
+
+.button:hover {
+  background-color: #2f2f2f;
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.7);
+}
+
+.button.operator {
+  background-color: #ff0000;
+}
+
+.button.operator:hover {
+  background-color: #cc0000;
+}
+
+.button.double {
+  grid-column: span 2;
+}
+
+.button.double-zero {
+  grid-column: span 2;
+}
+
+.button.zero {
+  grid-column: span 3;
+}
+      </style>
+</body>
+</html>
